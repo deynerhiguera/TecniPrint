@@ -1,4 +1,4 @@
-const NAMESPACE = 'tallerpro';
+const NAMESPACE = 'tecniprint';
 
 export function storageKey(name: string): string {
   return `${NAMESPACE}:${name}`;

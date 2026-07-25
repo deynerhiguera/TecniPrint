@@ -3,6 +3,7 @@ import { Sidebar } from '@/components/layout/Sidebar';
 import { Topbar } from '@/components/layout/Topbar';
 import { useReminders } from '@/hooks/useReminders';
 import type { Section } from '@/types/navigation';
+import { DashboardPage } from '@/pages/DashboardPage';
 import { ClientsPage } from '@/pages/ClientsPage';
 import { ServicesPage } from '@/pages/ServicesPage';
 import { RemindersPage } from '@/pages/RemindersPage';
@@ -11,6 +12,7 @@ import { CalculatorPage } from '@/pages/CalculatorPage';
 import { CalendarPage } from '@/pages/CalendarPage';
 
 const PAGES: Record<Section, () => React.JSX.Element> = {
+  dashboard: DashboardPage,
   clients: ClientsPage,
   services: ServicesPage,
   reminders: RemindersPage,
@@ -20,7 +22,7 @@ const PAGES: Record<Section, () => React.JSX.Element> = {
 };
 
 export default function App() {
-  const [section, setSection] = useState<Section>('clients');
+  const [section, setSection] = useState<Section>('dashboard');
   const { items: reminders } = useReminders();
   const pendingReminders = reminders.filter((reminder) => reminder.status === 'pending').length;
 
