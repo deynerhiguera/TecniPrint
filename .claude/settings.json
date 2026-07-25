@@ -13,7 +13,10 @@
       "Bash(node debug.mjs)",
       "Bash(node debug2.mjs)",
       "Bash(lsof -ti:5173 -sTCP:LISTEN)",
-      "Bash(xargs -r kill)"
+      "Bash(xargs -r kill)",
+      "Bash(npx tsc *)",
+      "Bash(node screenshot3.mjs)",
+      "Bash(node screenshot4.mjs)"
     ]
   }
 }

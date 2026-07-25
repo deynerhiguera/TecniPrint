@@ -1,4 +1,11 @@
-export type Section = 'clients' | 'services' | 'reminders' | 'catalog' | 'calculator' | 'calendar';
+export type Section =
+  | 'dashboard'
+  | 'clients'
+  | 'services'
+  | 'reminders'
+  | 'catalog'
+  | 'calculator'
+  | 'calendar';
 
 export interface NavItem {
   id: Section;
@@ -6,6 +13,7 @@ export interface NavItem {
 }
 
 export const NAV_ITEMS: NavItem[] = [
+  { id: 'dashboard', label: 'Panel general' },
   { id: 'clients', label: 'Clientes' },
   { id: 'services', label: 'Historial de servicios' },
   { id: 'reminders', label: 'Recordatorios' },

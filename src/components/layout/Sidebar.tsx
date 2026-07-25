@@ -1,4 +1,5 @@
 import {
+  LayoutDashboard,
   Users,
   Wrench,
   Bell,
@@ -11,6 +12,7 @@ import { cn } from '@/lib/cn';
 import { NAV_ITEMS, type Section } from '@/types/navigation';
 
 const ICONS: Record<Section, typeof Users> = {
+  dashboard: LayoutDashboard,
   clients: Users,
   services: Wrench,
   reminders: Bell,
@@ -31,7 +33,7 @@ export function Sidebar({ active, onSelect, reminderCount = 0 }: SidebarProps) {
       <div className="mb-3 flex items-center gap-2 px-1">
         <Cog className="size-6 text-accent" strokeWidth={2} />
         <span className="font-heading text-lg font-bold tracking-wide text-text">
-          TALLER<span className="text-accent">PRO</span>
+          TECNI<span className="text-accent">PRINT</span>
         </span>
       </div>
 
