@@ -12,6 +12,10 @@ import type { Machine, ServicePart, ServiceRecord, ServiceStatus } from '@/types
 
 const inputClass =
   'w-full rounded-sm border border-panel-border bg-surface-raised px-3 py-2 font-mono text-sm text-text placeholder:text-text-faint focus:border-accent focus:outline-none';
+// Same as inputClass but without a baked-in width, for rows that need flex-1/w-32/w-20 instead —
+// combining those with inputClass's own w-full is a no-op since Tailwind's cascade order (not
+// class order) decides the winner, and w-full always wins.
+const rowInputClass = inputClass.replace('w-full ', '');
 
 function Field({ label, children }: { label: string; children: ReactNode }) {
   return (
@@ -260,7 +264,7 @@ export function ServiceFormModal({
                   <input
                     value={part.name}
                     onChange={(event) => updatePart(part.id, { name: event.target.value })}
-                    className={inputClass}
+                    className={cn('flex-1', rowInputClass)}
                     placeholder="Nombre del repuesto"
                   />
                   <input
@@ -268,7 +272,7 @@ export function ServiceFormModal({
                     min={0}
                     value={part.cost}
                     onChange={(event) => updatePart(part.id, { cost: event.target.value })}
-                    className={cn('w-32', inputClass)}
+                    className={cn('w-32', rowInputClass)}
                     placeholder="Costo"
                   />
                   <input
@@ -276,7 +280,7 @@ export function ServiceFormModal({
                     min={1}
                     value={part.quantity}
                     onChange={(event) => updatePart(part.id, { quantity: event.target.value })}
-                    className={cn('w-20', inputClass)}
+                    className={cn('w-20', rowInputClass)}
                     placeholder="Cant."
                   />
                   <button
