@@ -38,7 +38,7 @@ export default function App() {
         {section === 'reminders' && <RemindersPage onSelectClient={navigateToClient} />}
         {section === 'catalog' && <CatalogPage />}
         {section === 'calculator' && <CalculatorPage />}
-        {section === 'calendar' && <CalendarPage />}
+        {section === 'calendar' && <CalendarPage onSelectClient={navigateToClient} />}
       </div>
     </div>
   );
