@@ -9,7 +9,7 @@ import { useServices } from '@/hooks/useServices';
 import { useClients } from '@/hooks/useClients';
 import { useReminders } from '@/hooks/useReminders';
 import { buildFollowUpReminder } from '@/lib/reminders';
-import { formatCurrency, formatDate } from '@/lib/format';
+import { formatCurrency, formatDate, parseLocalDate } from '@/lib/format';
 import { SERVICE_STATUS_LABEL, SERVICE_STATUS_OPTIONS, SERVICE_STATUS_TONE } from '@/lib/serviceStatus';
 import type { ServiceRecord, ServiceStatus } from '@/types';
 
@@ -18,7 +18,7 @@ const inputClass =
 
 function monthLabel(yearMonth: string): string {
   const label = new Intl.DateTimeFormat('es-CO', { month: 'long', year: 'numeric' }).format(
-    new Date(`${yearMonth}-01`),
+    parseLocalDate(`${yearMonth}-01`),
   );
   return label.charAt(0).toUpperCase() + label.slice(1);
 }
