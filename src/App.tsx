@@ -11,29 +11,34 @@ import { CatalogPage } from '@/pages/CatalogPage';
 import { CalculatorPage } from '@/pages/CalculatorPage';
 import { CalendarPage } from '@/pages/CalendarPage';
 
-const PAGES: Record<Section, () => React.JSX.Element> = {
-  dashboard: DashboardPage,
-  clients: ClientsPage,
-  services: ServicesPage,
-  reminders: RemindersPage,
-  catalog: CatalogPage,
-  calculator: CalculatorPage,
-  calendar: CalendarPage,
-};
-
 export default function App() {
   const [section, setSection] = useState<Section>('dashboard');
+  const [pendingClientId, setPendingClientId] = useState<string | null>(null);
   const { items: reminders } = useReminders();
   const pendingReminders = reminders.filter((reminder) => reminder.status === 'pending').length;
 
-  const Page = PAGES[section];
+  const handleSelectSection = (nextSection: Section) => {
+    setSection(nextSection);
+    setPendingClientId(null);
+  };
+
+  const navigateToClient = (clientId: string) => {
+    setPendingClientId(clientId);
+    setSection('clients');
+  };
 
   return (
     <div className="flex min-h-screen gap-4 p-4">
-      <Sidebar active={section} onSelect={setSection} reminderCount={pendingReminders} />
-      <div className="flex flex-1 flex-col gap-4">
+      <Sidebar active={section} onSelect={handleSelectSection} reminderCount={pendingReminders} />
+      <div className="flex min-w-0 flex-1 flex-col gap-4">
         <Topbar active={section} />
-        <Page />
+        {section === 'dashboard' && <DashboardPage />}
+        {section === 'clients' && <ClientsPage initialClientId={pendingClientId} />}
+        {section === 'services' && <ServicesPage onSelectClient={navigateToClient} />}
+        {section === 'reminders' && <RemindersPage onSelectClient={navigateToClient} />}
+        {section === 'catalog' && <CatalogPage />}
+        {section === 'calculator' && <CalculatorPage />}
+        {section === 'calendar' && <CalendarPage />}
       </div>
     </div>
   );

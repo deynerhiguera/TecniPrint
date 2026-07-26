@@ -17,12 +17,16 @@ interface ConfirmState {
   message: string;
 }
 
-export function ClientsPage() {
+interface ClientsPageProps {
+  initialClientId?: string | null;
+}
+
+export function ClientsPage({ initialClientId = null }: ClientsPageProps) {
   const clients = useClients();
   const services = useServices();
   const reminders = useReminders();
 
-  const [selectedClientId, setSelectedClientId] = useState<string | null>(null);
+  const [selectedClientId, setSelectedClientId] = useState<string | null>(initialClientId);
   const [search, setSearch] = useState('');
   const [clientModal, setClientModal] = useState<{ open: boolean; client?: Client }>({
     open: false,
